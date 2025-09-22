@@ -1,0 +1,38 @@
+models:
+  # Primary language model specification in the form <provider>:<model_name>
+  # Supported providers: 'ollama' for local models via Ollama, 'openai' for OpenAI chat models,
+  # 'anthropic' for Claude models. To use remote providers you must set the corresponding
+  # environment variables (OPENAI_API_KEY, ANTHROPIC_API_KEY) before running the API.
+  # primary: "ollama:llama"
+  primary: "openai:gpt-3.5-turbo-instruct"
+
+  # Natural language inference model used to detect contradictions.
+  # This should be a Hugging Face model name compatible with transformers.
+  nli: "roberta-large-mnli"
+
+retrieval:
+  # Sentence transformer used to embed text snippets for similarity search.  
+  # You can replace this with any model from the sentence-transformers library.
+  embedder: "sentence-transformers/all-MiniLM-L6-v2"
+
+  # Path to the FAISS index file.  When you run scripts/build_vectorstore.py this file
+  # will be created along with an accompanying .meta.json containing the raw texts.
+  index_path: "config/index.faiss"
+
+  # Path to an optional knowledge graph file.  If present this should be a JSON
+  # in NetworkX node-link format.  It is not used directly by the engine but
+  # can be leveraged in extensions.  For now leave it empty or remove.
+  graph_path: "config/graph.json"
+engine:
+  # Maximum number of questions to return per generation cycle.
+  max_questions: 12
+
+  # Minimum novelty score required to include a question in the trail.  
+  # Novelty values range from 0.0 (identical to existing knowledge) to 1.0 (completely novel).
+  novelty_threshold: 0.35
+
+  # Maximum time (in seconds) to spend generating questions in a single exploration session.
+  max_round_seconds: 25
+
+  # Maximum number of exploration rounds per session.
+  max_rounds: 3

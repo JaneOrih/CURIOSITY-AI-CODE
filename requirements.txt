@@ -1,0 +1,17 @@
+fastapi
+keras<3
+uvicorn
+pydantic
+httpx
+transformers
+torch>=2.0
+sentence-transformers>=2.2.0
+faiss-cpu
+# Pin NumPy below version 2 to avoid ABI incompatibility issues with dependent libraries
+numpy<2.0
+pandas
+scikit-learn
+networkx
+pyyaml
+streamlit
+keras<3
